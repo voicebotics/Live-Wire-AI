@@ -26,13 +26,3 @@ async def websocket_endpoint(websocket: WebSocket):
         # ^^^ Will need to do some prompt engineering once the application is setup
 
         await websocket.send_text(ai_response["choices"][0]["message"]["content"]) # Sends the AI's response back to the frontend in real time.
-
-
-# import openai
-
-# openai.api_key = "your-openai-api-key"
-
-# with open("C:\Users\saiad\Downloads\Sai-Adith-Closing-Statement.mp4", "rb") as audio_file:
-#     transcript = openai.Audio.transcribe("whisper-1", audio_file)
-
-# print(transcript["text"])
