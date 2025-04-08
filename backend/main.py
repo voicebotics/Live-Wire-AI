@@ -1,10 +1,13 @@
 from fastapi import FastAPI, WebSocket
-from openai import OpenAI
+import openai
 import database
 import ghl_api
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI()
-openai = OpenAI(api_key="") # Get it from .env file
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -28,11 +31,26 @@ async def websocket_endpoint(websocket: WebSocket):
         await websocket.send_text(ai_response["choices"][0]["message"]["content"]) # Sends the AI's response back to the frontend in real time.
 
 
+
+### This code works for testing ###
+
 # import openai
+# import os
+# from dotenv import load_dotenv
 
-# openai.api_key = "your-openai-api-key"
+# load_dotenv()
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# with open("C:\Users\saiad\Downloads\Sai-Adith-Closing-Statement.mp4", "rb") as audio_file:
-#     transcript = openai.Audio.transcribe("whisper-1", audio_file)
+# # Initialize the OpenAI client
+# client = openai.OpenAI()
 
-# print(transcript["text"])
+# # Open and transcribe the audio file
+# with open(r"", "rb") as audio_file:
+#     transcript = client.audio.transcriptions.create(
+#         model="whisper-1",
+#         file=audio_file,
+#         response_format="text"
+#     )
+
+# # Print the transcript text
+# print(transcript)
